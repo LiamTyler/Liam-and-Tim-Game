@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/empty-first-scene.unity
+- path: Assets/Scenes/camera-follow-moving-quad.unity
   isLoaded: 1
   isActive: 1
