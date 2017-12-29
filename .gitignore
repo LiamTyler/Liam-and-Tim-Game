@@ -1,9 +1,9 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/Assets/AssetStoreTools*
+Liam-and-Tim-Game-Unity/[Ll]ibrary/
+Liam-and-Tim-Game-Unity/[Tt]emp/
+Liam-and-Tim-Game-Unity/[Oo]bj/
+Liam-and-Tim-Game-Unity/[Bb]uild/
+Liam-and-Tim-Game-Unity/[Bb]uilds/
+Liam-and-Tim-Game-Unity//Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/
