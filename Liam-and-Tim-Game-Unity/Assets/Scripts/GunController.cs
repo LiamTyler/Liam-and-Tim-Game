@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunController : iWeaponController {
+public class GunController : MonoBehaviour, iWeaponController {
 
 	public float m_reloadTime;
 	public float m_actionTime;
 	public int m_projectilesPerReload;
 	public float m_projectileStartV;
 
-	virtual void StartAttack () {
+	public virtual void StartAttack () {
 	}
 
-	virtual void EndAttack () {
+	public virtual void EndAttack () {
 	}
 
-	virtual void Reload () {
+	public virtual void Reload () {
 	}
 
-	virtual void CycleAction () {
+	public virtual void CycleAction () {
 	}
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SemiAutoGunController : MonoBehaviour, GunController {
+public class SemiAutoGunController : GunController {
 
 	bool m_triggerDown;
 
 	public SemiAutoGunController () {
-		triggerDown = false;
+		m_triggerDown = false;
 	}
 
 	// Use this for initialization
@@ -24,17 +24,17 @@ public class SemiAutoGunController : MonoBehaviour, GunController {
 		
 	}
 
-	virtual void StartAttack () {
-		triggerDown = true;
+/*	public virtual void StartAttack () {
+		m_triggerDown = true;
 	}
 
-	virtual void EndAttack () {
-		triggerDown = false;
+	public virtual void EndAttack () {
+		m_triggerDown = false;
 	}
 
-	virtual void Reload () {
+	public virtual void Reload () {
 	}
 
-	virtual void CycleAction () {
-	}
+	public virtual void CycleAction () {
+	}*/
 }
