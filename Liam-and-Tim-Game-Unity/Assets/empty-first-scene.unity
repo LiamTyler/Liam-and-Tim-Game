@@ -112,17 +112,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1482059064
+--- !u!1 &185940411
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1482059068}
-  - component: {fileID: 1482059067}
-  - component: {fileID: 1482059066}
-  - component: {fileID: 1482059065}
+  - component: {fileID: 185940415}
+  - component: {fileID: 185940414}
+  - component: {fileID: 185940413}
+  - component: {fileID: 185940412}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -130,26 +130,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1482059065
+--- !u!81 &185940412
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482059064}
+  m_GameObject: {fileID: 185940411}
   m_Enabled: 1
---- !u!124 &1482059066
+--- !u!124 &185940413
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482059064}
+  m_GameObject: {fileID: 185940411}
   m_Enabled: 1
---- !u!20 &1482059067
+--- !u!20 &185940414
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482059064}
+  m_GameObject: {fileID: 185940411}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -175,16 +175,17 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1482059068
+--- !u!4 &185940415
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482059064}
+  m_GameObject: {fileID: 185940411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
