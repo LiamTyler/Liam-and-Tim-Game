@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : PlayerParent {
 
 	public GameObject Bullet;
-	public float moveSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +25,5 @@ public class PlayerController : MonoBehaviour {
 
 			Destroy(bullet, 2.0f);
 		}
-	}
-	
-	void FixedUpdate () {
-		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-		transform.position += move * moveSpeed;
-	}
+	}	
 }
