@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df3dbabcf2c544b19fa3de819ea06fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 8
+  m_MoveSpeed: 3
   m_Bullet: {fileID: 1911270132063598, guid: 3ecb8440d33937e44bf0f8accc78ccd7, type: 2}
 --- !u!23 &549441564
 MeshRenderer:

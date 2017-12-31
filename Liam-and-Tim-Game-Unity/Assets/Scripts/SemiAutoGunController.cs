@@ -21,20 +21,22 @@ public class SemiAutoGunController : GunController {
 	}
 
 	void FixedUpdate() {
-		
+		if (m_triggerDown) {
+			// shoot
+		}
 	}
 
-/*	public virtual void StartAttack () {
+	public override void StartAttack () {
 		m_triggerDown = true;
 	}
 
-	public virtual void EndAttack () {
+	public override void EndAttack () {
 		m_triggerDown = false;
 	}
 
-	public virtual void Reload () {
+	public override void Reload () {
 	}
 
-	public virtual void CycleAction () {
-	}*/
+	public override void CycleAction () {
+	}
 }
