@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class SemiAutoGunController : GunController {
 
-	bool m_triggerDown;
-
-	public SemiAutoGunController () {
-		m_triggerDown = false;
+    public SemiAutoGunController () {
 	}
 
 	// Use this for initialization
@@ -21,20 +18,26 @@ public class SemiAutoGunController : GunController {
 	}
 
 	void FixedUpdate() {
-		if (m_triggerDown) {
-			// shoot
-		}
 	}
 
 	public override void StartAttack () {
-		m_triggerDown = true;
+        Shoot();
 	}
 
 	public override void EndAttack () {
-		m_triggerDown = false;
 	}
 
-	public override void Reload () {
+    public override void Shoot() {
+        // Spawn bullet and give it a velocity. (bullet only lasts 2 seconds right now)
+        GameObject newBullet = Instantiate(
+            m_Projectile,
+            m_ProjectileSpawnPoint.transform.position,
+            Quaternion.LookRotation(Vector3.forward, transform.up));
+        newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * m_projectileStartV;
+        Destroy(newBullet, m_ProjectileLifeTime);
+    }
+
+    public override void Reload () {
 	}
 
 	public override void CycleAction () {
