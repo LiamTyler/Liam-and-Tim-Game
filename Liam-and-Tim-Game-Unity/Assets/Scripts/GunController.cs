@@ -2,56 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunController : MonoBehaviour, iWeaponController {
+public class GunController:MonoBehaviour, iWeaponController {
+  public float m_reloadTime;  // How long a reload takes
+  public float m_actionTime;  // How long a cycle action takes
+  protected float m_NextFireTime;  // Time when cycle action will be done
+  protected float m_ReloadCompleteTime;  // Time when reloading will be done
+  public GameObject m_Projectile;  // The bullet prefab that is being fired
+  public Transform m_ProjectileSpawnPoint;  // Location of where the bullet is firing from
+  public int m_projectilesPerReload;
+  public float m_projectileStartV;  // Bullet's starting speed
+  public float m_ProjectileLifeTime;  // How long the bullet will last, given no collisions
 
-	public float m_reloadTime;
-	public float m_actionTime;
-	public GameObject m_Projectile;
-	public Transform m_ProjectileSpawnPoint;
-	public int m_projectilesPerReload;
-	public float m_projectileStartV;
-	public float m_ProjectileLifeTime;
+  protected int m_projectilesInGun;  // Clip capacity
+  protected bool m_Reloading;  // True if currently reloading
+  protected bool m_triggerDown;  // True if the fire button is down
 
-	protected int m_projectilesInGun;
-	protected bool m_readyToFire;
-	protected bool m_triggerDown;
+  public virtual void Start() {
+    m_projectilesInGun = 0;
+    m_Reloading = false;
+    m_triggerDown = false;
+    m_NextFireTime = 0;
+    m_ReloadCompleteTime = Mathf.Infinity;
+  }
 
-	public virtual void StartAttack () {
-		m_triggerDown = true;
-	}
+  public virtual void StartAttack() {
+    m_triggerDown = true;
+  }
 
-	public virtual void EndAttack () {
-		m_triggerDown = false;
-	}
+  public virtual void EndAttack() {
+    m_triggerDown = false;
+  }
 
-	public virtual void Shoot() {
-		m_readyToFire = false;
-      // Spawn bullet and give it a velocity. (bullet only lasts 2 seconds right now)
-		if(m_projectilesInGun > 0)
-		{
-	      GameObject newBullet = Instantiate(
-	      m_Projectile,
-	      m_ProjectileSpawnPoint.transform.position,
-	      Quaternion.LookRotation(Vector3.forward, transform.up));
-	      newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * m_projectileStartV;
-	      Destroy(newBullet, m_ProjectileLifeTime);
-			--m_projectilesInGun;
+  public virtual void Update() {
+    if (m_Reloading && Time.time >= m_ReloadCompleteTime) {
+      m_Reloading = false;
+      m_projectilesInGun = m_projectilesPerReload;
+    } else if(m_triggerDown && !m_Reloading && Time.time > m_NextFireTime) {
+      Shoot();
+    }
+  }
 
-	      CycleAction ();
-		}
-	}
+  public virtual void Shoot() {
+    if(m_projectilesInGun > 0) {
+      GameObject newBullet = Instantiate(
+        m_Projectile,
+        m_ProjectileSpawnPoint.transform.position,
+        Quaternion.LookRotation(Vector3.forward,transform.up));
+      newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * m_projectileStartV;
+      Destroy(newBullet,m_ProjectileLifeTime);
+      --m_projectilesInGun;
 
-	public virtual void Reload () {
-		// add delay based on reload time
-		m_projectilesInGun = m_projectilesPerReload;
-	}
+      CycleAction();
+    }
+  }
 
-	public virtual void CycleAction () {
-		// some delay to limit fire rate
-		if(!m_triggerDown && m_projectilesInGun > 0)
-		{
-			m_readyToFire = true;
-		}
-		print("action cycled"); // debug
-	}
+  public virtual void Reload() {
+    m_ReloadCompleteTime = Time.time + m_reloadTime;
+    m_Reloading = true;
+  }
+
+  public virtual void CycleAction() {
+    m_NextFireTime = Time.time + m_actionTime;
+  }
 }

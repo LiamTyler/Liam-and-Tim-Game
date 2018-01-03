@@ -3,46 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SemiAutoGunController : GunController {
+  protected float m_LastCycleActionTime;
 
-   public SemiAutoGunController () {
-   }
+  public override void EndAttack() {
+    base.EndAttack();
+    m_NextFireTime = m_LastCycleActionTime + m_actionTime;
+  }
 
-   // Use this for initialization
-   void Start () {
-      m_projectilesInGun = 0;
-      m_readyToFire = false;
-      m_triggerDown = false;
-   }
-
-   // Update is called once per frame
-   void Update () {
-
-   }
-
-   void FixedUpdate() {
-      if(m_triggerDown && m_readyToFire)
-      {
-         Shoot();
-      }
-   }
-
-   //public override void StartAttack () {
-   //}
-
-   public override void EndAttack () {
-      base.EndAttack();
-      if(0 != m_projectilesInGun)
-      {
-         m_readyToFire = true;
-      }
-   }
-
-   //public override void Shoot() {
-   //}
-
-   //public override void Reload () {
-   //}
-
-   //public override void CycleAction () {
-   //}
+  public override void CycleAction() {
+    m_LastCycleActionTime = Time.time;
+    if (m_triggerDown)
+      m_NextFireTime = Mathf.Infinity;
+  }
 }
