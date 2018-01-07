@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/map_textures.unity
+- path: Assets/Scenes/camera-follow-moving-quad.unity
   isLoaded: 1
   isActive: 1

@@ -6,10 +6,12 @@ public class PlayerController:MonoBehaviour {
   public float m_MoveSpeed;
   public float m_PickUpRadius;
   private GameObject m_Weapon;
+  private iGunController m_gunController;
 
   // Use this for initialization
   void Start() {
     m_Weapon = null;
+    m_gunController = null;
   }
 
   // handle input
@@ -20,31 +22,32 @@ public class PlayerController:MonoBehaviour {
     Vector2 playerDir = mp - pp;
     // TODO(Both): Figure out better gun pointing
     if(m_Weapon) {
-      float radius = (pp - (Vector2)(m_Weapon.GetComponent<GunController>()
-        .m_ProjectileSpawnPoint.transform.position)).magnitude;
+      float radius = (pp - (Vector2)(m_gunController
+        .GetProjectileSpawnPoint().transform.position)).magnitude;
       Vector2 gunDir = mp - (Vector2)m_Weapon.transform.position;
       if (playerDir.magnitude > radius) {
         transform.up = gunDir.normalized;
-      } else {
       }
-    } else {
+      else {
+      }
+    }
+    else {
       transform.up = playerDir.normalized;
     }
 
     // Handle weapon firing
-    if(Input.GetMouseButtonDown(0)) {
-      if(m_Weapon)
-        m_Weapon.GetComponent<GunController>().StartAttack();
-    }
-    if(Input.GetMouseButtonUp(0)) {
-      if(m_Weapon)
-        m_Weapon.GetComponent<GunController>().EndAttack();
-    }
+    if(m_Weapon) {
+      if(Input.GetMouseButtonDown(0)) {
+        m_gunController.StartAttack();
+      }
+      if(Input.GetMouseButtonUp(0)) {
+        m_gunController.EndAttack();
+      }
 
-    if(Input.GetKeyDown("r")) {
-      if(m_Weapon) {
-        m_Weapon.GetComponent<GunController>().Reload();
-        m_Weapon.GetComponent<GunController>().CycleAction();
+      if(Input.GetKeyDown("r")) {
+        if(m_gunController.GetProjectilesInGun() < m_gunController.GetGunCapacity()) {
+          m_gunController.Reload();
+        }
       }
     }
 
@@ -54,7 +57,9 @@ public class PlayerController:MonoBehaviour {
       if(m_Weapon) {
         m_Weapon.transform.SetParent(transform.parent);
         m_Weapon = null;
-      } else {
+        m_gunController = null;
+      }
+      else {
         // Loop through all guns, and see which are within the pick up radius. Record
         // which gun is closest to the player
         GameObject closestGun = null;
@@ -75,10 +80,12 @@ public class PlayerController:MonoBehaviour {
           m_Weapon.transform.parent = transform;
           m_Weapon.transform.up = transform.up;
           m_Weapon.transform.localPosition = new Vector3(
-          .5f * (transform.localScale.x + m_Weapon.transform.localScale.x),
-          .5f * transform.localScale.y,
-          0);
+            0.5f * (transform.localScale.x + m_Weapon.transform.localScale.x),
+            0.5f * transform.localScale.y,
+            0
+          );
 
+          m_gunController = m_Weapon.GetComponent<iGunController>();
         }
       }
     }

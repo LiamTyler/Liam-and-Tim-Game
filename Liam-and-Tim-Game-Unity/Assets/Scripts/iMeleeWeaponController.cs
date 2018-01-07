@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FullAutoGunController : AutoGunController {
+public interface iMeleeWeaponController {
 
+  void StartAttack();
+  void EndAttack();
 }
