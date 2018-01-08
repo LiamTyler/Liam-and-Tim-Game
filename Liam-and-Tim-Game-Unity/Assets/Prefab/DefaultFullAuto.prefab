@@ -149,11 +149,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b2f03b8544ece47ad5b1352fb48119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_reloadTime: 0
+  m_reloadTime: 2
   m_actionTime: 0.1
-  m_Projectile: {fileID: 1266201859727506, guid: b2e5b4bd19eaad64d9774a82a96dbf34,
+  m_manualActionTime: 0.3
+  m_projectile: {fileID: 1266201859727506, guid: b2e5b4bd19eaad64d9774a82a96dbf34,
     type: 2}
-  m_ProjectileSpawnPoint: {fileID: 4759167028928906}
-  m_projectilesPerReload: 25
-  m_projectileStartV: 4
-  m_ProjectileLifeTime: 3
+  m_projectileSpawnPoint: {fileID: 4759167028928906}
+  m_restingPosition: {fileID: 0}
+  m_gunCapacity: 25
+  m_projectileStartV: 5
+  m_projectileLifeTime: 5
+  m_projectilesInGun: 0
+  m_gunCocked: 0
+  m_reloading: 0
+  m_cycling: 0
+  m_triggerDown: 0
