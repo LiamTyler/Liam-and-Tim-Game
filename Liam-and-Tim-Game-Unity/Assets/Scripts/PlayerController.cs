@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController:MonoBehaviour {
+public class PlayerController : ShootableController {
   public float m_MoveSpeed;
   public float m_PickUpRadius;
   private GameObject m_Weapon;
