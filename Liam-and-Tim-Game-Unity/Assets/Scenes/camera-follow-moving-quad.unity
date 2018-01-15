@@ -112,48 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &209444613
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147430985279526, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f3b98859f21674c4fafc04510be9e291, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1153833348
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d7944578294d344b9a189ea8899587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Filename: Assets/Resources/map3.txt
+  m_Filename: Assets/Resources/map1.txt
   m_StartSquare: {fileID: 1114787346328924, guid: 5cf059cadd83e5e4f9854038211019f6,
     type: 2}
   m_FinishSquare: {fileID: 1011745192344938, guid: db28f8ccd7dbb4d49aac4423f2304e4d,
@@ -337,7 +295,6 @@ GameObject:
   - component: {fileID: 1879212019}
   - component: {fileID: 1879212018}
   - component: {fileID: 1879212017}
-  - component: {fileID: 1879212021}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -379,7 +336,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -408,20 +365,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1879212021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1879212016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea43fe573729c44d3a9d3ce77f5e2a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1883834798}
---- !u!1 &1883834798 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1983074205517324, guid: f3b98859f21674c4fafc04510be9e291,
-    type: 2}
-  m_PrefabInternal: {fileID: 209444613}
