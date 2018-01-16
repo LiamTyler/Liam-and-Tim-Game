@@ -56,14 +56,21 @@ public class NavGrid {
     return w;
   }
 
-  public bool IsValidAndNotAWall(NavCell node) {
-    Vector2 pos = node.Pos();
-    int r = (int) pos.x;
-    int c = (int) pos.y;
-    if (0 <= c && c < m_width &&
-        0 <= r && r < m_height &&
-        !m_grid[r,c].IsWall())
-      return true;
+  public bool IsValidAndNotAWall(NavCell from, NavCell to) {
+    Vector2 new_pos = to.Pos();
+    int nr = (int) new_pos.x;
+    int nc = (int) new_pos.y;
+    if (0 <= nc && nc < m_width &&
+        0 <= nr && nr < m_height &&
+        !m_grid[nr,nc].IsWall()) {
+      int or = (int) from.Pos().x;
+      int oc = (int) from.Pos().y;
+      if (or != nr || oc != nc) {
+        return !m_grid[or,nc].IsWall() && !m_grid[nr, oc].IsWall();
+      } else {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -83,12 +90,23 @@ public class NavGrid {
       new NavCell(new Vector2(r, c+1)),
       new NavCell(new Vector2(r+1, c)),
       new NavCell(new Vector2(r-1, c)),
+      new NavCell(new Vector2(r+1, c-1)),
+      new NavCell(new Vector2(r+1, c+1)),
+      new NavCell(new Vector2(r-1, c+1)),
+      new NavCell(new Vector2(r-1, c-1)),
     };
     List<NavCell> neighbors = new List<NavCell>();
     for (int i = 0; i < potential.Count; i++) {
-      if (IsValidAndNotAWall(potential[i])) {
+      if (IsValidAndNotAWall(node, potential[i])) {
         NavCell n = potential[i];
-        n.G(node.G() + .5f*Cost(node) + .5f*Cost(n));
+        int nr = (int) n.Pos().x;
+        int nc = (int) n.Pos().y;
+        // change cost depending on whether the neighbor is diagonal or not
+        if (r != nr && c != nc) {
+          n.G(node.G() + .7071f*Cost(node) + .7071f*Cost(n));
+        } else {
+          n.G(node.G() + .5f*Cost(node) + .5f*Cost(n));
+        }
         n.Parent(node);
         neighbors.Add(n);
       }

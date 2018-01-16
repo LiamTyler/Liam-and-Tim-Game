@@ -42,7 +42,6 @@ public class NavAgentController : MonoBehaviour {
       }
     }
     m_path = m_navController.FindPath(transform.position, m_destination);
-    Debug.Log(m_path);
     if (m_path != null) {
       m_path_index = 0;
       for (int i = 0; i < m_path.Count; i++) {

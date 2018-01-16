@@ -89,9 +89,21 @@ public class NavigationController : MonoBehaviour {
     return lowest;
   }
 
+  /*
+  // manhattan distance
   float Heuristic(NavCell current, NavCell goal) {
     Vector2 d = current.Pos() - goal.Pos();
     return Mathf.Abs(d.x) + Mathf.Abs(d.y);
+  }
+  */
+  // diagonal distance
+  float Heuristic(NavCell current, NavCell goal) {
+    Vector2 d = current.Pos() - goal.Pos();
+    float dx = Mathf.Abs(d.x);
+    float dy = Mathf.Abs(d.y);
+    float D = 1;
+    float D2 = 1.4142f;
+    return D * (dx + dy) + (D2 - 2 * D) * Mathf.Min(dx, dy);
   }
 
   public static List<NavCell> CreatePath(NavCell end) {
@@ -151,9 +163,7 @@ public class NavigationController : MonoBehaviour {
       RaycastHit2D hit = Physics2D.Raycast(mp, Vector2.zero);
       m_Selected = null;
       if (hit.collider != null) {
-        Debug.Log("Found object");
         if (hit.collider.gameObject.GetComponent<NavAgentController>() != null) {
-          Debug.Log("Object is a navagent");
           m_Selected = hit.collider.gameObject;
         }
       }
