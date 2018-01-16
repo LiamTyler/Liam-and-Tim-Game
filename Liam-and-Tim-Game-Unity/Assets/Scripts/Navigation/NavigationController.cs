@@ -7,25 +7,29 @@ public class NavigationController : MonoBehaviour {
   public Vector3 m_navGridCenter;
   public string m_mapName;
   public NavGrid m_navGrid;
-  public Vector3 m_Start;
-  public Vector3 m_Finish;
 
-  public static Stack<NavCell> CreatePath(NavCell node) {
-    Stack<NavCell> path = new Stack<NavCell>();
-    path.Push(node);
-    node = node.Parent();
-    while (node.Parent() != null) {
-      path.Push(node);
-      node = node.Parent();
-    }
-    return path;
-  }
+  public GameObject m_wallSquare;
+  public GameObject m_Selected;
 
   public Vector2 WorldToGridCoord(Vector2 p) { return m_navGrid.WorldToGridCoord(p); }
   public Vector3 GridCoordToWorld(Vector2 p) { return m_navGrid.GridCoordToWorld(p); }
 
 	void Start () {
-		// GenerateMap();
+    m_Selected = null;
+    GenerateMap();
+    for (int r = -1; r < m_navGrid.m_height + 1; r++) {
+      for (int c = -1; c < m_navGrid.m_width + 1; c++) {
+        if (r < 0 || r == m_navGrid.m_height ||
+            c < 0 || c == m_navGrid.m_width) {
+          Instantiate(m_wallSquare, GridCoordToWorld(new Vector2(r, c)), Quaternion.identity);
+        } else {
+          GridCell cell = m_navGrid.GetGridCell(r, c);
+          if (cell.IsWall()) {
+            Instantiate(m_wallSquare, GridCoordToWorld(new Vector2(r, c)), Quaternion.identity);
+          }
+        }
+      }
+    }
 	}
 
   public void GenerateMap() {
@@ -46,16 +50,13 @@ public class NavigationController : MonoBehaviour {
         bool isWall = false;
         char ch = chars[c];
         if (ch == 'S') {
-          // m_Start = Instantiate(m_startSquare, m_navGrid.GridCoordToWorld(r, c), Quaternion.identity);
-          m_Start = GridCoordToWorld(new Vector2(r, c));
+
           cost = 1;
         } else if (ch == 'F') {
-          // m_Finish = Instantiate(m_finishSquare,  m_navGrid.GridCoordToWorld(r, c), Quaternion.identity);
-          m_Finish = GridCoordToWorld(new Vector2(r, c));
+
           cost = 1;
         } else if (ch == 'W') {
           isWall = true;
-          // Instantiate(m_wallSquare,  m_navGrid.GridCoordToWorld(r, c), Quaternion.identity);
         } else {
           cost = int.Parse(ch.ToString());
         }
@@ -93,9 +94,26 @@ public class NavigationController : MonoBehaviour {
     return Mathf.Abs(d.x) + Mathf.Abs(d.y);
   }
 
-  public Stack<NavCell> FindPath(NavCell start, NavCell goal) {
+  public static List<NavCell> CreatePath(NavCell end) {
+    Stack<NavCell> path = new Stack<NavCell>();
+    List<NavCell> p = new List<NavCell>();
+    path.Push(end);
+    end = end.Parent();
+    while (end != null) {
+      path.Push(end);
+      end = end.Parent();
+    }
+    while (path.Count != 0) {
+      p.Add(path.Pop());
+    }
+    return p;
+  }
+
+  public List<NavCell> FindPath(Vector2 start_pos, Vector2 goal_pos) {
     List<NavCell> open_list = new List<NavCell>();
     List<NavCell> closed_list = new List<NavCell>();
+    NavCell start = new NavCell(WorldToGridCoord(start_pos));
+    NavCell goal = new NavCell(WorldToGridCoord(goal_pos));
     start.G(0);
     start.F(start.G() + Heuristic(start, goal));
     open_list.Add(start);
@@ -125,5 +143,26 @@ public class NavigationController : MonoBehaviour {
       }
     }
     return null;
-  }	
+  }
+
+  void Update () {
+		if (Input.GetMouseButtonUp(0)) {
+      Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      RaycastHit2D hit = Physics2D.Raycast(mp, Vector2.zero);
+      m_Selected = null;
+      if (hit.collider != null) {
+        Debug.Log("Found object");
+        if (hit.collider.gameObject.GetComponent<NavAgentController>() != null) {
+          Debug.Log("Object is a navagent");
+          m_Selected = hit.collider.gameObject;
+        }
+      }
+    }
+    if (Input.GetMouseButtonUp(1) && m_Selected != null) {
+      Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      m_Selected.GetComponent<NavAgentController>().SetDestination(mp);
+      m_Selected.GetComponent<NavAgentController>().FindPath();
+      m_Selected.GetComponent<NavAgentController>().Enabled(true);
+    }
+	}
 }

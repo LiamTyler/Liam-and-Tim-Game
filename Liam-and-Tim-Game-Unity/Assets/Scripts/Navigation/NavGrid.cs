@@ -18,7 +18,6 @@ public class NavGrid {
     m_topLeftCorner = new Vector3(center.x - dx * (int) (m_width - 1) / 2,
                                   center.y + dy * (int) (m_height - 1) / 2,
                                   center.z);
-    Debug.Log(m_topLeftCorner);
     m_grid = new GridCell[h, w];
     for (int r = 0; r < h; r++) {
       for (int c = 0; c < w; c++) {
