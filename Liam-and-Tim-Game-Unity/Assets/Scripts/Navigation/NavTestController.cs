@@ -13,6 +13,8 @@ public class NavTestController : MonoBehaviour {
   public GameObject m_wallSquare;
   public GameObject m_walkSquare;
 
+  public GameObject m_agent;
+
   private GameObject m_Start;
   private GameObject m_Finish;
 
@@ -75,6 +77,9 @@ public class NavTestController : MonoBehaviour {
           GameObject sq = Instantiate(m_walkSquare, m_navController.GridCoordToWorld(path_arr[i].Pos()), Quaternion.identity);
           m_Path.Push(new PathCell { cell = path_arr[i], square = sq });
         }
+        path.Push(start);
+        m_agent.GetComponent<NavAgentController>().SetPath(path);
+        m_agent.GetComponent<NavAgentController>().Enabled(true);
       }
     }
 	}

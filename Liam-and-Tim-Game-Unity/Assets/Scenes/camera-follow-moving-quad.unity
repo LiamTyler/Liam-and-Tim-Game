@@ -112,6 +112,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &732175860 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983074205517324, guid: f3b98859f21674c4fafc04510be9e291,
+    type: 2}
+  m_PrefabInternal: {fileID: 2106532313}
+--- !u!114 &732175866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 732175860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522cff515dc757640b52c964476670ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_navController: {fileID: 1795555333}
+  m_speed: 150
+  m_goalRadius: 0.04
 --- !u!1 &1153833348
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +319,7 @@ MonoBehaviour:
     type: 2}
   m_walkSquare: {fileID: 1279064719470594, guid: 770a43e37fc31f5419008b4ff017c6d8,
     type: 2}
+  m_agent: {fileID: 732175860}
 --- !u!1 &1879212016
 GameObject:
   m_ObjectHideFlags: 0
