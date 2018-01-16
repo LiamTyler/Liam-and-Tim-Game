@@ -40,7 +40,6 @@ public class AStar : MonoBehaviour {
   private GameObject m_Finish;
   private Stack<PathCell> m_Path;
 
-  private
 
 	// Use this for initialization
 	void Start () {
